@@ -1,0 +1,178 @@
+{
+  "classes": [
+    {
+      "name": "Web User",
+      "attributes": [
+        "login_id: String {id}",
+        "password: String",
+        "state: UserState"
+      ],
+      "operations": []
+    },
+    {
+      "name": "Customer",
+      "attributes": [
+        "id: String {id}",
+        "address: Address",
+        "phone: Phone",
+        "email: String"
+      ],
+      "operations": []
+    },
+    {
+      "name": "Account",
+      "attributes": [
+        "id: String {id}",
+        "billing_address: Address",
+        "is_closed: Boolean",
+        "open: Date",
+        "closed: Date"
+      ],
+      "operations": []
+    },
+    {
+      "name": "Shopping Cart",
+      "attributes": [
+        "created: Date"
+      ],
+      "operations": []
+    },
+    {
+      "name": "Payment",
+      "attributes": [
+        "id: String {id}",
+        "paid: Date",
+        "total: Real",
+        "details: String"
+      ],
+      "operations": []
+    },
+    {
+      "name": "Order",
+      "attributes": [
+        "number: String {id}",
+        "ordered: Date",
+        "shipped: Date",
+        "ship_to: Address",
+        "status: OrderStatus",
+        "total: Real"
+      ],
+      "operations": []
+    },
+    {
+      "name": "LineItem",
+      "attributes": [
+        "quantity: Integer",
+        "price: Price"
+      ],
+      "operations": []
+    },
+    {
+      "name": "Product",
+      "attributes": [
+        "id: String {id}",
+        "name: String",
+        "supplier: Supplier"
+      ],
+      "operations": []
+    }
+  ],
+  "enumerations": [
+    {
+      "name": "UserState",
+      "literals": [
+        "New",
+        "Active",
+        "Blocked",
+        "Banned"
+      ]
+    },
+    {
+      "name": "OrderStatus",
+      "literals": [
+        "New",
+        "Hold",
+        "Shipped",
+        "Delivered",
+        "Closed"
+      ]
+    }
+  ],
+  "relationships": {
+    "association": [
+      {
+        "direction": "bidirectional",
+        "source": "Web User",
+        "target": "Customer",
+        "multiplicity_source": "0..1",
+        "multiplicity_target": "1"
+      },
+      {
+        "direction": "bidirectional",
+        "source": "Web User",
+        "target": "Shopping Cart",
+        "multiplicity_source": "1",
+        "multiplicity_target": "0..1"
+      },
+      {
+        "direction": "bidirectional",
+        "source": "Shopping Cart",
+        "target": "LineItem",
+        "multiplicity_source": "1",
+        "multiplicity_target": "*"
+      },
+      {
+        "direction": "bidirectional",
+        "source": "Order",
+        "target": "LineItem",
+        "multiplicity_source": "1",
+        "multiplicity_target": "*"
+      },
+      {
+        "direction": "bidirectional",
+        "source": "Order",
+        "target": "Payment",
+        "multiplicity_source": "1",
+        "multiplicity_target": "0..*"
+      },
+      {
+        "direction": "bidirectional",
+        "source": "Account",
+        "target": "Payment",
+        "multiplicity_source": "1",
+        "multiplicity_target": "0..*"
+      },
+      {
+        "direction": "bidirectional",
+        "source": "LineItem",
+        "target": "Product",
+        "multiplicity_source": "*",
+        "multiplicity_target": "1"
+      }
+    ],
+    "composition": [
+      {
+        "whole": "Customer",
+        "part": "Account",
+        "multiplicity_whole": "1",
+        "multiplicity_part": "1"
+      },
+      {
+        "whole": "Account",
+        "part": "Order",
+        "multiplicity_whole": "1",
+        "multiplicity_part": "*"
+      },
+      {
+        "whole": "Account",
+        "part": "Shopping Cart",
+        "multiplicity_whole": "1",
+        "multiplicity_part": "1"
+      }
+    ],
+    "aggregation": [],
+    "dependency": [],
+    "inheritance": [],
+    "realization": []
+  }
+}

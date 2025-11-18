@@ -1,0 +1,152 @@
+{
+  "classes": [
+    {
+      "name": "Coverage Type",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Health Insurance Policy",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Insurance Plan",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Job Based Coverage",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Self Coverage",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Individual Policy",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Family Policy",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Benefits Coverage",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Medicare",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "CHIP",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "PCIP",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "HMO Plan",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "POS Plan",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "PPO Plan",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "FFS Plan",
+      "attributes": [],
+      "operations": []
+    }
+  ],
+  "enumerations": [],
+  "relationships": {
+    "association": [
+      {
+        "direction": "bidirectional",
+        "source": "Coverage Type",
+        "target": "Health Insurance Policy",
+        "multiplicity_source": "1",
+        "multiplicity_target": "*"
+      },
+      {
+        "direction": "bidirectional",
+        "source": "Health Insurance Policy",
+        "target": "Insurance Plan",
+        "multiplicity_source": "*",
+        "multiplicity_target": "1"
+      }
+    ],
+    "composition": [],
+    "aggregation": [],
+    "dependency": [],
+    "inheritance": [
+      {
+        "parent": "Health Insurance Policy",
+        "child": "Job Based Coverage"
+      },
+      {
+        "parent": "Health Insurance Policy",
+        "child": "Self Coverage"
+      },
+      {
+        "parent": "Health Insurance Policy",
+        "child": "Benefits Coverage"
+      },
+      {
+        "parent": "Self Coverage",
+        "child": "Individual Policy"
+      },
+      {
+        "parent": "Self Coverage",
+        "child": "Family Policy"
+      },
+      {
+        "parent": "Benefits Coverage",
+        "child": "Medicare"
+      },
+      {
+        "parent": "Benefits Coverage",
+        "child": "CHIP"
+      },
+      {
+        "parent": "Benefits Coverage",
+        "child": "PCIP"
+      },
+      {
+        "parent": "Health Insurance Policy",
+        "child": "HMO Plan"
+      },
+      {
+        "parent": "Health Insurance Policy",
+        "child": "POS Plan"
+      },
+      {
+        "parent": "Health Insurance Policy",
+        "child": "PPO Plan"
+      },
+      {
+        "parent": "Health Insurance Policy",
+        "child": "FFS Plan"
+      }
+    ],
+    "realization": []
+  }
+}

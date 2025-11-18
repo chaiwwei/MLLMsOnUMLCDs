@@ -1,0 +1,96 @@
+{
+  "classes": [
+    {
+      "name": "Hasp",
+      "attributes": [
+        "-featureid: Long",
+        "-status: Integer",
+        "-handle: Integer[*] = {0}"
+      ],
+      "operations": [
+        "+«Create» Hasp(feature_id: Long)",
+        "+login(vendor_code: String): Boolean",
+        "+loginScope(scope: String, vendor_code: String): Boolean",
+        "+logout(): Boolean",
+        "+encrypt(buffer: Byte[*]): Boolean",
+        "+decrypt(buffer: Byte[*]): Boolean",
+        "+getInfo(scope: String, format: String, vendor_code: String): String",
+        "+getRealTimeClock(): HaspTime",
+        "+getVersion(String vendor_code): HaspApiVersion"
+      ]
+    },
+    {
+      "name": "HaspStatus",
+      "attributes": [
+        "+HASP_STATUS_OK: Integer = 0 {readOnly}",
+        "+HASP_MEM_RANGE: Integer = 1 {readOnly}",
+        "+HASP_INV_PROGNUM_OPT: Integer = 2 {readOnly}",
+        "+HASP_INSUF_MEM: Integer = 3 {readOnly}",
+        "+HASP_INT_ERR: Integer = 699 {readOnly}"
+      ],
+      "operations": [
+        "+Init()"
+      ]
+    },
+    {
+      "name": "HaspTime",
+      "attributes": [
+        "-time: Long[*] = {0}",
+        "-day: Integer[*] = {0}",
+        "-month: Integer[*] = {0}",
+        "-year: Integer[*] = {0}",
+        "-hour: Integer[*] = {0}",
+        "-minute: Integer[*] = {0}",
+        "-second: Integer[*] = {0}",
+        "-status: Integer"
+      ],
+      "operations": [
+        "+«Create» HaspTime(haspTime: Long)",
+        "+«Create» HaspTime(year: Integer, month: Integer, day: Integer, hour: Integer, minute: Integer, second: Integer)",
+        "+getLastError(): Integer",
+        "+DatetimeToHasptime(...): Integer {native}",
+        "-HasptimeToDatetime(...): Integer {native}"
+      ]
+    },
+    {
+      "name": "HaspApiVersion",
+      "attributes": [
+        "-major_version: Integer[*] = {0}",
+        "-minor_version: Integer[*] = {0}",
+        "-build_server: Integer[*] = {0}",
+        "-build_number: Integer[*] = {0}",
+        "-status: Integer"
+      ],
+      "operations": [
+        "+«Create» HaspApiVersion(vendor_code: String)",
+        "+getMajorVersion(): Integer",
+        "+getMinorVersion(): Integer",
+        "+buildNumber(): Integer",
+        "+getLastError(): Integer",
+        "-GetVersion(major_version: Integer[*], minor_version: Integer[*], build_server: Integer[*], build_number: Integer[*], vendor_code: Byte[]): Integer {native}"
+      ]
+    }
+  ],
+  "enumerations": [],
+  "relationships": {
+    "association": [],
+    "composition": [],
+    "aggregation": [],
+    "dependency": [
+      {
+        "dependent": "Hasp",
+        "supplier": "HaspStatus"
+      },
+      {
+        "dependent": "Hasp",
+        "supplier": "HaspTime"
+      },
+      {
+        "dependent": "Hasp",
+        "supplier": "HaspApiVersion"
+      }
+    ],
+    "inheritance": [],
+    "realization": []
+  }
+}

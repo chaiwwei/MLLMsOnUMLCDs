@@ -1,0 +1,110 @@
+{
+  "classes": [
+    {
+      "name": "com.abc.user.Login.Logger",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "loginCtrl: com.abc.user::LoginController",
+      "attributes": [
+        "-attemptLimit: Integer: 5",
+        "-lockoutTime: Integer: 30",
+        "-loginURI = \"/users/sign-in\"",
+        "-logoutURI = \"/users/sign-out\""
+      ],
+      "operations": []
+    },
+    {
+      "name": ":com.abc.user::UserManager",
+      "attributes": [
+        "- digester: PasswordDigester",
+        "-authorizationRules: Rules[7] {unique}"
+      ],
+      "operations": []
+    },
+    {
+      "name": ":com.abc.user::CookieManager",
+      "attributes": [
+        "+cookieMaxAge: Integer = 1814400",
+        "+cookieDomain = \"abc.com\"",
+        "-crypto: Cryptograph"
+      ],
+      "operations": [
+        "+createUserCookie(user: User, Boolean rememberMe): Cookie"
+      ]
+    },
+    {
+      "name": ":String",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": ":com.abc.user.dao::HibernateUserDAO",
+      "attributes": ["-site = \"abc.com\"", "-sessionFactory: SessionFactory"],
+      "operations": [
+        "+findUser(loginID: String, pswHash: Hash): User",
+        "+findUser(email: String): User"
+      ]
+    }
+  ],
+  "enumerations": [],
+  "relationships": {
+    "association": [
+      {
+        "direction": "unidirectional",
+        "source": "loginCtrl: com.abc.user::LoginController",
+        "target": "com.abc.user:Logger",
+        "multiplicity_source": "",
+        "multiplicity_target": ""
+      },
+      {
+        "direction": "unidirectional",
+        "source": "loginCtrl: com.abc.user::LoginController",
+        "target": ":com.abc.user::UserManager",
+        "multiplicity_source": "",
+        "multiplicity_target": ""
+      },
+      {
+        "direction": "unidirectional",
+        "source": "loginCtrl: com.abc.user::LoginController",
+        "target": ":com.abc.user::CookieManager",
+        "multiplicity_source": "",
+        "multiplicity_target": ""
+      },
+      {
+        "direction": "unidirectional",
+        "source": ":com.abc.user::UserManager",
+        "target": "com.abc.user:Logger",
+        "multiplicity_source": "",
+        "multiplicity_target": ""
+      },
+      {
+        "direction": "unidirectional",
+        "source": ":com.abc.user::UserManager",
+        "target": ":com.abc.user::CookieManager",
+        "multiplicity_source": "",
+        "multiplicity_target": ""
+      },
+      {
+        "direction": "unidirectional",
+        "source": ":com.abc.user::UserManager",
+        "target": ":String",
+        "multiplicity_source": "",
+        "multiplicity_target": "5 {ordered, unique}"
+      },
+      {
+        "direction": "unidirectional",
+        "source": ":com.abc.user::UserManager",
+        "target": ":com.abc.user.dao::HibernateUserDAO",
+        "multiplicity_source": "",
+        "multiplicity_target": ""
+      }
+    ],
+    "composition": [],
+    "aggregation": [],
+    "dependency": [],
+    "inheritance": [],
+    "realization": []
+  }
+}

@@ -1,0 +1,208 @@
+{
+  "classes": [
+    {
+      "name": "Customer",
+      "attributes": [
+        "CRM_ID {id}",
+        "type: CustomerType",
+        "description: String [0..1]"
+      ],
+      "operations": []
+    },
+    {
+      "name": "Individual",
+      "attributes": [
+        "firstName: String",
+        "lastName: String",
+        "middleName: String [0..1]",
+        "email: String",
+        "phone: String [0..1]",
+        "locale: String [0..1] = \"English\""
+      ],
+      "operations": []
+    },
+    {
+      "name": "Company",
+      "attributes": [
+        "name: String",
+        "phone: String [0..1]",
+        "fax: String [0..1]"
+      ],
+      "operations": []
+    },
+    {
+      "name": "Entitlement",
+      "attributes": [
+        "EID: String {id}",
+        "type: EntitlementType",
+        "startDate: Date",
+        "endDate: Date [0..1]",
+        "neverExpires: Boolean = true",
+        "comments: String [0..1]"
+      ],
+      "operations": []
+    },
+    {
+      "name": "Batch Code",
+      "attributes": ["id: String {id, id.size() = 5}"],
+      "operations": []
+    },
+    {
+      "name": "Details",
+      "attributes": [
+        "street: String [0..1]",
+        "city: String [0..1]",
+        "postalCode: String [0..1]",
+        "state: String [0..1]",
+        "country: String [0..1]"
+      ],
+      "operations": []
+    },
+    {
+      "name": "Contact",
+      "attributes": [
+        "firstName: String",
+        "lastName: String",
+        "middleName: String [0..1]",
+        "email: String",
+        "phone : String [0..1]",
+        "locale: String [0..1] = \"English\""
+      ],
+      "operations": []
+    },
+    {
+      "name": "Feature",
+      "attributes": [
+        "id: Integer {id}",
+        "name: String {name.size() <= 50}",
+        "description: String [0..1]"
+      ],
+      "operations": []
+    },
+    {
+      "name": "Product",
+      "attributes": [
+        "id: Integer {id}",
+        "name: String {name.size() <= 50}",
+        "lockingType: LockingType",
+        "rehost: Rehost",
+        "description: String [0..1]"
+      ],
+      "operations": []
+    }
+  ],
+
+  "enumerations": [
+    {
+      "name": "CustomerType",
+      "literals": ["Individual", "Company"]
+    },
+    {
+      "name": "EntitlementType",
+      "literals": ["Hardware Key", "Product Key", "Protection Key Update"]
+    },
+    {
+      "name": "LockingType",
+      "literals": [
+        "HL",
+        "SL-AdminMode",
+        "SL-UserMode",
+        "HL or SL-AdminMode",
+        "HL or SL (AdminMode or UserMode)"
+      ]
+    },
+    {
+      "name": "Rehost",
+      "literals": [
+        "Enable",
+        "Disable",
+        "Leave as it is",
+        "Specify at entitlement time"
+      ]
+    }
+  ],
+  "relationships": {
+    "inheritance": [
+      {
+        "parent": "Customer",
+        "child": "Individual"
+      },
+      {
+        "parent": "Customer",
+        "child": "Company"
+      }
+    ],
+    "association": [
+      {
+        "direction": "bidirectional",
+        "source": "Entitlement",
+        "target": "Customer",
+        "multiplicity_source": "0..*",
+        "multiplicity_target": "1..1"
+      },
+      {
+        "direction": "bidirectional",
+        "source": "Entitlement",
+        "target": "Product",
+        "multiplicity_source": "0..*",
+        "multiplicity_target": "0..*"
+      },
+      {
+        "direction": "bidirectional",
+        "source": "Batch Code",
+        "target": "Product",
+        "multiplicity_source": "1..1",
+        "multiplicity_target": "0..*"
+      },
+      {
+        "direction": "bidirectional",
+        "source": "Batch Code",
+        "target": "Feature",
+        "multiplicity_source": "1..1",
+        "multiplicity_target": "0..*"
+      },
+      {
+        "direction": "unidirectional",
+        "source": "Batch Code",
+        "target": "Customer",
+        "multiplicity_source": "",
+        "multiplicity_target": ""
+      }
+    ],
+    "composition": [
+      {
+        "whole": "Individual",
+        "part": "Details",
+        "multiplicity_whole": "1",
+        "multiplicity_part": "1"
+      },
+      {
+        "whole": "Company",
+        "part": "Details",
+        "multiplicity_whole": "1",
+        "multiplicity_part": "1"
+      },
+      {
+        "whole": "Company",
+        "part": "Contact",
+        "multiplicity_whole": "1",
+        "multiplicity_part": "1"
+      },
+      {
+        "whole": "Product",
+        "part": "Product",
+        "multiplicity_whole": "*",
+        "multiplicity_part": "1..1"
+      }
+    ],
+    "aggregation": [
+      {
+        "whole": "Product",
+        "part": "Feature",
+        "multiplicity_whole": "0..*",
+        "multiplicity_part": "1..*"
+      }
+    ],
+    "realization": []
+  }
+}

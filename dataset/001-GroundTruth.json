@@ -1,0 +1,165 @@
+{
+  "classes": [
+    {
+      "name": "Bank Account",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Liability Type",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Account Type",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Business Account",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Personal Account",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Checking Account",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Money Market Account",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Certificates of Deposit",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Savings Account",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Children's Savings Account",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Health Savings Account",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "No Frills Checking",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Checking with Interest",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Account Interest",
+      "attributes": [],
+      "operations": []
+    }
+  ],
+  "relationships": {
+    "association": [
+      {
+        "source": "Bank Account",
+        "target": "Liability Type",
+        "multiplicity_source": "*",
+        "multiplicity_target": "1"
+      },
+      {
+        "source": "Bank Account",
+        "target": "Account Type",
+        "multiplicity_source": "*",
+        "multiplicity_target": "1"
+      },
+      {
+        "source": "Checking Account",
+        "target": "Account Interest",
+        "multiplicity_source": "*",
+        "multiplicity_target": "0..1"
+      },
+      {
+        "source": "Money Market Account",
+        "target": "Account Interest",
+        "multiplicity_source": "*",
+        "multiplicity_target": "0..1"
+      },
+      {
+        "source": "Certificates of Deposit",
+        "target": "Account Interest",
+        "multiplicity_source": "*",
+        "multiplicity_target": "0..1"
+      },
+      {
+        "source": "Savings Account",
+        "target": "Account Interest",
+        "multiplicity_source": "*",
+        "multiplicity_target": "1"
+      }
+    ],
+
+    "inheritance": [
+      {
+        "parent": "Bank Account",
+        "child": "Business Account"
+      },
+      {
+        "parent": "Bank Account",
+        "child": "Personal Account"
+      },
+      {
+        "parent": "Bank Account",
+        "child": "Checking Account"
+      },
+      {
+        "parent": "Bank Account",
+        "child": "Money Market Account"
+      },
+      {
+        "parent": "Bank Account",
+        "child": "Certificates of Deposit"
+      },
+      {
+        "parent": "Bank Account",
+        "child": "Savings Account"
+      },
+      {
+        "parent": "Savings Account",
+        "child": "Children's Savings Account"
+      },
+      {
+        "parent": "Savings Account",
+        "child": "Health Savings Account"
+      },
+      {
+        "parent": "Personal Account",
+        "child": "Health Savings Account"
+      },
+      {
+        "parent": "Personal Account",
+        "child": "Children's Savings Account"
+      },
+      {
+        "parent": "Checking Account",
+        "child": "Checking with Interest"
+      },
+      {
+        "parent": "Checking Account",
+        "child": "No Frills Checking"
+      }
+    ]
+  }
+}

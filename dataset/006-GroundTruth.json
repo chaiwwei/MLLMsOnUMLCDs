@@ -1,0 +1,205 @@
+{
+  "classes": [
+    {
+      "name": "Person",
+      "attributes": [
+        "title: String",
+        "givenName: String",
+        "middleName: String",
+        "familyName: String",
+        "/name: FullName",
+        "birthDate: Date",
+        "gender: Gender",
+        "/homeAddress: Address",
+        "phone: Phone"
+      ],
+      "operations": []
+    },
+    {
+      "name": "Patient",
+      "attributes": [
+        "id: String {id}",
+        "^name: FullName",
+        "^gender: Gender",
+        "^birthDate: Date",
+        "/age: Integer",
+        "accepted: Date",
+        "sickness: History",
+        "prescriptions: String[*]",
+        "allergies: String[*]",
+        "specialReqs: String[*]"
+      ],
+      "operations": []
+    },
+    {
+      "name": "Staff",
+      "attributes": [
+        "joined: Date",
+        "education: String[*]",
+        "certification: String[*]",
+        "languages: String[*]"
+      ],
+      "operations": []
+    },
+    {
+      "name": "Operations Staff",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Doctor",
+      "attributes": [
+        "specialty: String[*]",
+        "locations: String[*]"
+      ],
+      "operations": []
+    },
+    {
+      "name": "Surgeon",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Nurse",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Administrative Staff",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Front Desk Staff",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Receptionist",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Technical Staff",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Technician",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Technologist",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Surgical Technologist",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Hospital",
+      "attributes": [
+        "name: String {id}",
+        "/address: Address",
+        "phone: Phone"
+      ],
+      "operations": []
+    },
+    {
+      "name": "Department",
+      "attributes": [],
+      "operations": []
+    }
+  ],
+  "enumerations": [],
+  "relationships": {
+    "association": [
+      {
+        "direction": "bidirectional",
+        "source": "Person",
+        "target": "Hospital",
+        "multiplicity_source": "*",
+        "multiplicity_target": "*"
+      },
+      {
+        "direction": "bidirectional",
+        "source": "Patient",
+        "target": "Operations Staff",
+        "multiplicity_source": "*",
+        "multiplicity_target": "*"
+      }
+    ],
+    "composition": [],
+    "aggregation": [{
+        "whole": "Hospital",
+        "part": "Department",
+        "multiplicity_whole": "1",
+        "multiplicity_part": "*"
+      },
+      {
+        "whole": "Department",
+        "part": "Staff",
+        "multiplicity_whole": "1",
+        "multiplicity_part": "*"
+      }],
+    "dependency": [],
+    "inheritance": [
+      {
+        "parent": "Person",
+        "child": "Patient"
+      },
+      {
+        "parent": "Person",
+        "child": "Staff"
+      },
+      {
+        "parent": "Staff",
+        "child": "Operations Staff"
+      },
+      {
+        "parent": "Staff",
+        "child": "Administrative Staff"
+      },
+      {
+        "parent": "Staff",
+        "child": "Technical Staff"
+      },
+      {
+        "parent": "Operations Staff",
+        "child": "Doctor"
+      },
+      {
+        "parent": "Operations Staff",
+        "child": "Nurse"
+      },
+      {
+        "parent": "Doctor",
+        "child": "Surgeon"
+      },
+      {
+        "parent": "Administrative Staff",
+        "child": "Front Desk Staff"
+      },
+      {
+        "parent": "Front Desk Staff",
+        "child": "Receptionist"
+      },
+      {
+        "parent": "Technical Staff",
+        "child": "Technician"
+      },
+      {
+        "parent": "Technical Staff",
+        "child": "Technologist"
+      },
+      {
+        "parent": "Technologist",
+        "child": "Surgical Technologist"
+      }
+    ],
+    "realization": []
+  }
+}

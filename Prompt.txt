@@ -1,0 +1,42 @@
+You are an expert software engineer. Analyze the UML class diagram in the image and extract all modeling elements in the following strict JSON format:
+{
+  "classes": [
+    {
+      "name": "ClassName",
+      "attributes": ["+attr1: Type1", "-attr2: Type2", "#attr3: Type3", "~attr4: Type4", ...],
+      "operations": ["+op1(param1: Type): ReturnType", "-op2(): void", ...]
+    },
+    ...
+  ],
+  "enumerations": [
+    {
+      "name": "EnumName",
+      "literals": ["LITERAL1", "LITERAL2", "LITERAL3", ...]
+    },
+    ...
+  ],
+   "relationships": {
+    "association": [{"direction":"unidirectional|bidirectional ", "source":"classA", "target":"classB", "multiplicity_source":"e.g., 1, 0..1, *", "multiplicity_target":"e.g., 1, 0..1, *"}, ...],
+    "composition": [{"whole":"classA", "part":"classB", "multiplicity_whole":"e.g., 1, 0..1, *", "multiplicity_part":"e.g., 1, 0..1, *"}, ...],
+    "aggregation": [{"whole":"classA", "part":"classB", "multiplicity_whole":"e.g., 1, 0..1, *", "multiplicity_part":"e.g., 1, 0..1, *"}, ...],
+    "dependency": [{"dependent":"classA", "supplier":"classB"}, ...],
+    "inheritance": [{"parent":"classA", "child":"classB"}, ...],
+    "realization": [{"interface":"interface", "implementation":"class"}, ...]
+  }
+}
+
+Rules: 
+1. Preserve visibility symbols exactly as shown in the diagram. If no visibility symbol is visible, do not assume one and leave it blank.
+2. Use exact class, attribute, and operation names as they appear.
+3. For relationships, infer the type from UML notation:
+   (1) Association is noted by a solid line between two classes. If the solid line has an arrowhead, the direction should be unidirectional. Multiplicities and role names may appear at each end.
+   (2) Generalization (Inheritance) is noted by a solid line with a hollow triangle.	
+   (3) Aggregation is noted by a solid line with a hollow diamond at the whole end.
+   (4) Composition is noted by a solid line with a filled diamond at the whole end.
+   (5) Dependency is noted by a dashed line with an open arrowhead pointing to the dependent (used) class.  	
+   (6) Realization is noted by a dashed line with a hollow triangle arrowhead pointing to the interface.
+4. Enumerations can participate in relationships. In the "relationships" array, both source and target may refer to class names or enum names.
+5. If multiplicity is missing, use an empty string: ""; if no enums, "enumerations": [] is acceptable;
+6. Do not add any explanations, comments, or markdown. 
+
+Output the result in valid and parsable JSON 

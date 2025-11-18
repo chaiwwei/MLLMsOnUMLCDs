@@ -1,0 +1,422 @@
+{
+  "classes": [
+    {
+      "name": "Application",
+      "attributes": [],
+      "operations": [
+        "+getState(): State",
+        "+setState( newState: State): Boolean",
+        "+bringToFront( requestedScreenArea: Rectangle): Boolean"
+      ]
+    },
+    {
+      "name": "Host",
+      "attributes": [],
+      "operations": [
+        "+generateUUID(): UUID",
+        "+getAvailableScreen( appPrefScreen: Rectangle): Rectangle",
+        "+getOutputLocation( preferredProtocols: String[*]): String",
+        "+notifyStateChanged(state: State)",
+        "+notifyStatus(status: Status)"
+      ]
+    },
+    {
+      "name": "DataExchange",
+      "attributes": [],
+      "operations": [
+        "+notifyDataAvailable(data: AvailableData, lastData: Boolean): Boolean",
+        "+getData(objectUIDs: UUID[*], accTransferSyntaxUIDs: UUID[*], includeBulkData: boolean): ObjectLocator[*]",
+        "+getAsModels(objectUIDs: UUID[*], classUID: UID, suppInfonetTypes: MimeType[*]): ModelSetDescriptor",
+        "+queryModel(models: UUID[*], xpaths: String[*]) : QueryResult[*]",
+        "+queryInfoset(models: UUID[*], xpaths: String[*]) : QueryResultInfoset[*]",
+        "+releaseData(objectUIDs: UUID[*])",
+        "+releaseModels(objectUIDs: UUID[*])"
+      ]
+    },
+    {
+      "name": "Rectangle",
+      "attributes": [
+        "refPointX: Integer",
+        "refPointY: Integer",
+        "width: Integer",
+        "height: Integer"
+      ],
+      "operations": []
+    },
+    {
+      "name": "Status",
+      "attributes": [
+        "statusType: StatusType",
+        "codingSchemeDesignator: String {SH}",
+        "codeValue: String {LO}",
+        "codeMeaning: String {LO}"
+      ],
+      "operations": []
+    },
+    {
+      "name": "AvailableData",
+      "attributes": [
+        "objectDescriptors: ObjectDescriptor[*]",
+        "patients: Patient[*]"
+      ],
+      "operations": []
+    },
+    {
+      "name": "Patient",
+      "attributes": [
+        "ID: String {id, LO}",
+        "name: String {PN}",
+        "assigningAuthority: String {LO}",
+        "sex: String {CS}",
+        "birthDate: String {DA}",
+        "objectDescriptors: ObjectDescriptor[*]",
+        "studies: Study[*]"
+      ],
+      "operations": []
+    },
+    {
+      "name": "Study",
+      "attributes": [
+        "studyUID: UID {id, UI}",
+        "objectDescriptors: ObjectDescriptor[*]",
+        "series: Series[*]"
+      ],
+      "operations": []
+    },
+    {
+      "name": "Series",
+      "attributes": [
+        "SeriesUID: UID {UI}",
+        "objectDescriptors: ObjectDescriptor[*]"
+      ],
+      "operations": []
+    },
+    {
+      "name": "ObjectDescriptor",
+      "attributes": [
+        "descriptorUUID: UUID",
+        "mimeType: MimeType",
+        "classUID: UID",
+        "transferSyntaxUID: UID",
+        "modality: String"
+      ],
+      "operations": []
+    },
+    {
+      "name": "ObjectLocator",
+      "attributes": [
+        "locator: UUID",
+        "source: UUID",
+        "transferSyntax: UID",
+        "length: long",
+        "offset: long",
+        "URI: URI"
+      ],
+      "operations": []
+    },
+    {
+      "name": "QueryResult",
+      "attributes": ["model: UUID", "xpath: String", "results: XPathNode[*]"],
+      "operations": []
+    },
+    {
+      "name": "QueryResultInfoset",
+      "attributes": [
+        "model: UUID",
+        "xpath: String",
+        "results: XPathNodeInfonet[*]"
+      ],
+      "operations": []
+    },
+    {
+      "name": "ModelSetDescriptor",
+      "attributes": [
+        "infosetType: MimeType",
+        "models: UUID[*]",
+        "failedSourceObjects: UUID[*]"
+      ],
+      "operations": []
+    },
+    {
+      "name": "MimeType",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "UID",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "UID",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "UUID",
+      "attributes": [],
+      "operations": []
+    }
+  ],
+  "enumerations": [
+    {
+      "name": "State",
+      "literals": [
+        "IDLE",
+        "INPROGRESS",
+        "COMPLETED",
+        "SUSPENDED",
+        "CANCELED",
+        "EXIT"
+      ]
+    },
+    {
+      "name": "StatusType",
+      "literals": ["INFORMATION", "WARNING", "ERROR", "FATALERROR"]
+    }
+  ],
+  "relationships": {
+    "association": [
+      {
+        "direction": "unidirectional",
+        "source": "AvailableData",
+        "target": "Patient",
+        "multiplicity_source": "",
+        "multiplicity_target": ""
+      },
+      {
+        "direction": "unidirectional",
+        "source": "Patient",
+        "target": "Study",
+        "multiplicity_source": "",
+        "multiplicity_target": ""
+      },
+      {
+        "direction": "unidirectional",
+        "source": "Study",
+        "target": "Series",
+        "multiplicity_source": "",
+        "multiplicity_target": ""
+      },
+      {
+        "direction": "unidirectional",
+        "source": "Series",
+        "target": "ObjectDescriptor",
+        "multiplicity_source": "",
+        "multiplicity_target": ""
+      },
+      {
+        "direction": "unidirectional",
+        "source": "ObjectDescriptor",
+        "target": "MimeType",
+        "multiplicity_source": "",
+        "multiplicity_target": ""
+      },
+      {
+        "direction": "unidirectional",
+        "source": "ObjectLocator",
+        "target": "UUID",
+        "multiplicity_source": "",
+        "multiplicity_target": ""
+      },
+      {
+        "direction": "unidirectional",
+        "source": "QueryResult",
+        "target": "XPathNode",
+        "multiplicity_source": "",
+        "multiplicity_target": "*"
+      },
+      {
+        "direction": "unidirectional",
+        "source": "QueryResultInfoset",
+        "target": "XPathNodeInfonet",
+        "multiplicity_source": "",
+        "multiplicity_target": "*"
+      },
+      {
+        "direction": "unidirectional",
+        "source": "ModelSetDescriptor",
+        "target": "MimeType",
+        "multiplicity_source": "",
+        "multiplicity_target": ""
+      },
+      {
+        "direction": "unidirectional",
+        "source": "ModelSetDescriptor",
+        "target": "UUID",
+        "multiplicity_source": "",
+        "multiplicity_target": "*"
+      },
+      {
+        "direction": "unidirectional",
+        "source": "ModelSetDescriptor",
+        "target": "UUID",
+        "multiplicity_source": "",
+        "multiplicity_target": "*"
+      },
+      {
+        "direction": "unidirectional",
+        "source": "AvailableData",
+        "target": "ObjectDescriptor",
+        "multiplicity_source": "",
+        "multiplicity_target": "*"
+      },
+      {
+        "direction": "unidirectional",
+        "source": "Patient",
+        "target": "ObjectDescriptor",
+        "multiplicity_source": "",
+        "multiplicity_target": "*"
+      },
+      {
+        "direction": "unidirectional",
+        "source": "Study",
+        "target": "ObjectDescriptor",
+        "multiplicity_source": "",
+        "multiplicity_target": "*"
+      },
+      {
+        "direction": "unidirectional",
+        "source": "Series",
+        "target": "ObjectDescriptor",
+        "multiplicity_source": "",
+        "multiplicity_target": "*"
+      }
+    ],
+    "composition": [],
+    "aggregation": [],
+    "dependency": [
+      {
+        "dependent": "Application",
+        "supplier": "State"
+      },
+      {
+        "dependent": "Application",
+        "supplier": "Rectangle"
+      },
+      {
+        "dependent": "Host",
+        "supplier": "UUID"
+      },
+      {
+        "dependent": "Host",
+        "supplier": "Rectangle"
+      },
+      {
+        "dependent": "Host",
+        "supplier": "State"
+      },
+      {
+        "dependent": "Host",
+        "supplier": "Status"
+      },
+      {
+        "dependent": "DataExchange",
+        "supplier": "AvailableData"
+      },
+      {
+        "dependent": "DataExchange",
+        "supplier": "UUID"
+      },
+      {
+        "dependent": "DataExchange",
+        "supplier": "ObjectLocator"
+      },
+      {
+        "dependent": "DataExchange",
+        "supplier": "MimeType"
+      },
+      {
+        "dependent": "DataExchange",
+        "supplier": "ModelSetDescriptor"
+      },
+      {
+        "dependent": "DataExchange",
+        "supplier": "QueryResult"
+      },
+      {
+        "dependent": "DataExchange",
+        "supplier": "QueryResultInfonet"
+      },
+      {
+        "dependent": "Status",
+        "supplier": "StatusType"
+      },
+      {
+        "dependent": "ObjectDescriptor",
+        "supplier": "UUID"
+      },
+      {
+        "dependent": "ObjectDescriptor",
+        "supplier": "MimeType"
+      },
+      {
+        "dependent": "ObjectLocator",
+        "supplier": "UUID"
+      },
+      {
+        "dependent": "QueryResult",
+        "supplier": "UUID"
+      },
+      {
+        "dependent": "QueryResultInfonet",
+        "supplier": "UUID"
+      },
+      {
+        "dependent": "ModelSetDescriptor",
+        "supplier": "UUID"
+      },
+      {
+        "dependent": "Series",
+        "supplier": "UUID"
+      },
+      {
+        "dependent": "Study",
+        "supplier": "UUID"
+      },
+      {
+        "dependent": "Patient",
+        "supplier": "String"
+      },
+      {
+        "dependent": "Patient",
+        "supplier": "UUID"
+      },
+      {
+        "dependent": "ObjectDescriptor",
+        "supplier": "String"
+      },
+      {
+        "dependent": "Status",
+        "supplier": "String"
+      },
+      {
+        "dependent": "Rectangle",
+        "supplier": "Integer"
+      },
+      {
+        "dependent": "ObjectLocator",
+        "supplier": "Long"
+      },
+      {
+        "dependent": "ObjectLocator",
+        "supplier": "URI"
+      }
+    ],
+    "inheritance": [],
+    "realization": [
+      {
+        "interface": "Application",
+        "implementation": "Host"
+      },
+      {
+        "interface": "Application",
+        "implementation": "DataExchange"
+      },
+      {
+        "interface": "Host",
+        "implementation": "DataExchange"
+      }
+    ]
+  }
+}

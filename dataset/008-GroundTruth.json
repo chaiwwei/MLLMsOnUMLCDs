@@ -1,0 +1,213 @@
+{
+  "classes": [
+    {
+      "name": "Patient",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Clinical Document",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Service Episode",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Visit",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Facility",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Imaging Service Request",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Requested Procedure",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Procedure Type",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Scheduled Procedure Step",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Modality Performed Procedure Step",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Protocol Code",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Procedure Plan",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Series",
+      "attributes": [],
+      "operations": []
+    }
+  ],
+  "enumerations": [],
+  "relationships": {
+    "association": [
+      {
+        "direction": "bidirectional",
+        "source": "Patient",
+        "target": "Clinical Document",
+        "multiplicity_source": "1",
+        "multiplicity_target": "0..*"
+      },
+      {
+        "direction": "bidirectional",
+        "source": "Visit",
+        "target": "Facility",
+        "multiplicity_source": "0..*",
+        "multiplicity_target": "1"
+      },
+      {
+        "direction": "bidirectional",
+        "source": "Requested Procedure",
+        "target": "Procedure Type",
+        "multiplicity_source": "1..*",
+        "multiplicity_target": "1"
+      },
+	      {
+        "direction": "bidirectional",
+        "source": "Requested Procedure",
+        "target": "Modality Performed Procedure Step",
+        "multiplicity_source": "0..*",
+        "multiplicity_target": "0..*"
+      },
+      {
+        "direction": "bidirectional",
+        "source": "Scheduled Procedure Step",
+        "target": "Modality Performed Procedure Step",
+        "multiplicity_source": "0..*",
+        "multiplicity_target": "0..*"
+      },
+      {
+        "direction": "bidirectional",
+        "source": "Protocol Code",
+        "target": "Modality Performed Procedure Step",
+        "multiplicity_source": "1",
+        "multiplicity_target": "1"
+      },
+      {
+        "direction": "bidirectional",
+        "source": "Procedure Type",
+        "target": "Modality Performed Procedure Step",
+        "multiplicity_source": "1",
+        "multiplicity_target": "0..*"
+      },
+      {
+        "direction": "bidirectional",
+        "source": "Facility",
+        "target": "Service Episode",
+        "multiplicity_source": "1",
+        "multiplicity_target": "0..*"
+      },
+      {
+        "direction": "bidirectional",
+        "source": "Visit",
+        "target": "Facility",
+        "multiplicity_source": "0..*",
+        "multiplicity_target": "1"
+      },
+      {
+        "direction": "bidirectional",
+        "source": "Procedure Plan",
+        "target": "Request Procedure",
+        "multiplicity_source": "1",
+        "multiplicity_target": "1"
+      },
+      {
+        "direction": "bidirectional",
+        "source": "Procedure Plan",
+        "target": "Protocol Code",
+        "multiplicity_source": "1",
+        "multiplicity_target": "1..*"
+      }
+    ],
+    "composition": [
+	  {
+        "whole": "Patient",
+        "part": "Imaging Service Request",
+        "multiplicity_whole": "1",
+        "multiplicity_part": "0..*"
+      },
+	  {
+        "whole": "Imaging Service Request",
+        "part": "Requested Procedure",
+        "multiplicity_whole": "1",
+        "multiplicity_part": "1..*"
+      },
+	  {
+        "whole": "Requested Procedure",
+        "part": "Scheduled Procedure Step",
+        "multiplicity_whole": "1",
+        "multiplicity_part": "1..*"
+      },
+      {
+        "whole": "Scheduled Procedure Step",
+        "part": "Protocol Code",
+        "multiplicity_whole": "1",
+        "multiplicity_part": "1..*"
+      },
+      {
+        "whole": "Patient",
+        "part": "Visit",
+        "multiplicity_whole": "1",
+        "multiplicity_part": "0..*"
+      }
+    ],
+    "aggregation": [
+	  {
+        "whole": "Patient",
+        "part": "Service Episode",
+        "multiplicity_whole": "1",
+        "multiplicity_part": "0..*"
+      },
+      {
+        "whole": "Service Episode",
+        "part": "Visit",
+        "multiplicity_whole": "1",
+        "multiplicity_part": "0..*"
+      },
+      {
+        "whole": "Visit",
+        "part": "Requested Procedure",
+        "multiplicity_whole": "1",
+        "multiplicity_part": "0..*"
+      },
+      {
+        "whole": "Modality Performed Procedure Step",
+        "part": "Series",
+        "multiplicity_whole": "1",
+        "multiplicity_part": "0..*"
+      }
+	],
+      
+    "dependency": [],
+    "inheritance": [],
+    "realization": []
+  }
+}

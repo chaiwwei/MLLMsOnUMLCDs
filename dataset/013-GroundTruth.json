@@ -1,0 +1,118 @@
+{
+  "classes": [
+    {
+      "name": "Client",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "ConcreteFactoryX",
+      "attributes": [],
+      "operations": [
+        "+createProductA(): ProductA",
+        "+createProductB(): ProductB"
+      ]
+    },
+    {
+      "name": "ConcreteFactoryY",
+      "attributes": [],
+      "operations": [
+        "+createProductA(): ProductA",
+        "+createProductB(): ProductB"
+      ]
+    },
+	{
+      "name": "ProductA",
+      "attributes": [],
+      "operations": []
+    },
+	{
+      "name": "ProductB",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "ProductAX",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "ProductAY",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "ProductBX",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "ProductBY",
+      "attributes": [],
+      "operations": []
+    }
+  ],
+  "enumerations": [],
+  "relationships": {
+    "association": [],
+    "composition": [],
+    "aggregation": [],
+    "dependency": [
+      {
+        "dependent": "Client",
+        "supplier": "AbstractFactory"
+      },
+      {
+        "dependent": "Client",
+        "supplier": "ProductA"
+      },
+      {
+        "dependent": "Client",
+        "supplier": "ProductB"
+      },
+      {
+        "dependent": "ConcreteFactoryX",
+        "supplier": "ProductAX"
+      },
+      {
+        "dependent": "ConcreteFactoryX",
+        "supplier": "ProductBX"
+      },
+      {
+        "dependent": "ConcreteFactoryY",
+        "supplier": "ProductAY"
+      },
+      {
+        "dependent": "ConcreteFactoryY",
+        "supplier": "ProductBY"
+      }
+    ],
+    "inheritance": [],
+    "realization": [
+      {
+        "interface": "AbstractFactory",
+        "implementation": "ConcreteFactoryX"
+      },
+      {
+        "interface": "AbstractFactory",
+        "implementation": "ConcreteFactoryY"
+      },
+      {
+        "interface": "ProductA",
+        "implementation": "ProductAX"
+      },
+      {
+        "interface": "ProductA",
+        "implementation": "ProductAY"
+      },
+      {
+        "interface": "ProductB",
+        "implementation": "ProductBX"
+      },
+      {
+        "interface": "ProductB",
+        "implementation": "ProductBY"
+      }
+    ]
+  }
+}

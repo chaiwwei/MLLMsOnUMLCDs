@@ -1,0 +1,275 @@
+{
+  "classes": [
+    {
+      "name": "Executors",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Callable",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Executor",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "ThreadFactory",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "ExecutorCompletionService",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Future",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "ExecutorService",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "BlockingQueue",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "FutureTask",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "ForkJoinTask",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "ScheduledExecutorService",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "AbstractExecutorService",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "RecursiveAction",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "RecursiveTask",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "ForkJoinPool",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "ThreadPoolExecutor",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "ScheduledThreadPoolExecutor",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "CountDownLatch",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "CyclicBarrier",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Phaser",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Semaphore",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Exchanger",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "ForkJoinWorkerThread",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "RejectedExecutionHandler",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "ScheduledThreadPoolExecutor",
+      "attributes": [],
+      "operations": []
+    }
+  ],
+  "enumerations": [
+    {
+      "name": "TimeUnit",
+      "literals": []
+    }
+  ],
+  "relationships": {
+    "association": [],
+    "composition": [],
+    "aggregation": [
+      {
+        "whole": "ForkJoinWorkerThread",
+        "part": "ForkJoinPool",
+        "multiplicity_whole": "",
+        "multiplicity_part": ""
+      },
+      {
+        "whole": "ThreadPoolExecutor",
+        "part": "BlockingQueue",
+        "multiplicity_whole": "",
+        "multiplicity_part": ""
+      },
+      {
+        "whole": "ThreadPoolExecutor",
+        "part": "RejectedExecutionHandler",
+        "multiplicity_whole": "",
+        "multiplicity_part": ""
+      },
+      {
+        "whole": "ForkJoinPool",
+        "part": "ForkJoinWorkerThread",
+        "multiplicity_whole": "",
+        "multiplicity_part": ""
+      }
+    ],
+    "dependency": [
+      {
+        "dependent": "Executors",
+        "supplier": "Callable"
+      },
+      {
+        "dependent": "Executors",
+        "supplier": "ThreadFactory"
+      },
+      {
+        "dependent": "Executors",
+        "supplier": "ExecutorService"
+      },
+      {
+        "dependent": "Executors",
+        "supplier": "ScheduledExecutorService"
+      },
+      {
+        "dependent": "ExecutorService",
+        "supplier": "Callable"
+      },
+      {
+        "dependent": "ExecutorService",
+        "supplier": "Future"
+      },
+      {
+        "dependent": "CompletionService",
+        "supplier": "Future"
+      },
+      {
+        "dependent": "ExecutorCompletionService",
+        "supplier": "Executor"
+      },
+      {
+        "dependent": "ExecutorCompletionService",
+        "supplier": "BlockingQueue"
+      },
+      {
+        "dependent": "ForkJoinPool",
+        "supplier": "ForkJoinTask"
+      },
+      {
+        "dependent": "CountDownLatch",
+        "supplier": "TimeUnit"
+      },
+      {
+        "dependent": "CyclicBarrier",
+        "supplier": "TimeUnit"
+      },
+      {
+        "dependent": "Phaser",
+        "supplier": "TimeUnit"
+      },
+      {
+        "dependent": "Semaphore",
+        "supplier": "TimeUnit"
+      },
+      {
+        "dependent": "Exchanger",
+        "supplier": "TimeUnit"
+      }
+    ],
+    "inheritance": [
+      {
+        "parent": "Executor",
+        "child": "ExecutorService"
+      },
+      {
+        "parent": "ExecutorService",
+        "child": "ScheduledExecutorService"
+      },
+      {
+        "parent": "AbstractExecutorService",
+        "child": "ThreadPoolExecutor"
+      },
+      {
+        "parent": "ThreadPoolExecutor",
+        "child": "ScheduledThreadPoolExecutor"
+      },
+      {
+        "parent": "AbstractExecutorService",
+        "child": "ForkJoinPool"
+      },
+      {
+        "parent": "ForkJoinTask",
+        "child": "RecursiveAction"
+      },
+      {
+        "parent": "ForkJoinTask",
+        "child": "RecursiveTask"
+      }
+    ],
+    "realization": [
+      {
+        "interface": "ExecutorService",
+        "implementation": "AbstractExecutorService"
+      },
+      {
+        "interface": "CompletionService",
+        "implementation": "ExecutorCompletionService"
+      },
+      {
+        "interface": "Future",
+        "implementation": "FutureTask"
+      },
+      {
+        "interface": "Future",
+        "implementation": "ForkJoinTask"
+      }
+    ]
+  }
+}

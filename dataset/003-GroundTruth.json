@@ -1,0 +1,165 @@
+{
+  "classes": [
+    {
+      "name": "android.view.View",
+      "attributes": [],
+      "operations": ["+getContext(): Context {final}", "+draw(canvas: Canvas)"]
+    },
+    {
+      "name": "android.view.SurfaceView",
+      "attributes": [],
+      "operations": ["^+ draw(canvas: Canvas)", "^+ getHolder(): SurfaceHolder"]
+    },
+    {
+      "name": "Preview",
+      "attributes": ["~ mHolder: SurfaceHolder"],
+      "operations": [
+        "+ «Create» Preview(context: Context)",
+        "^+ surfaceChanged(holder: SurfaceHolder, format: Integer, width: Integer, height: Integer)",
+        "^+ surfaceCreated(holder: SurfaceHolder)",
+        "^+ surfaceDestroyed(holder: SurfaceHolder)",
+        "^+ getHolder(): SurfaceHolder",
+        "^+ draw(canvas: Canvas)"
+      ]
+    },
+    {
+      "name": "android.view.SurfaceHolder",
+      "attributes": [],
+      "operations": [
+        "+ addCallback(callback: SurfaceHolder.Callback)",
+        "+ removeCallback(callback: SurfaceHolder.Callback)",
+        "+ setType(type: Integer)",
+        "+ setFormat(format: Integer)",
+        "+ getSurface(): Surface"
+      ]
+    },
+    {
+      "name": "android.view.SurfaceHolder.Callback",
+      "attributes": [],
+      "operations": [
+        "+ surfaceChanged(holder: SurfaceHolder, format: Integer, width: Integer, height: Integer)",
+        "+ surfaceCreated(holder: SurfaceHolder)",
+        "+ surfaceDestroyed(holder: SurfaceHolder)"
+      ]
+    },
+    {
+      "name": "android.app.Activity",
+      "attributes": [],
+      "operations": [
+        "# onCreate(state: Bundle)",
+        "# onStart()",
+        "# onStop()",
+        "# onResume()",
+        "# onPause()",
+        "# onDestroy()",
+        "+ onCreateOptionsMenu(menu: Menu): Boolean",
+        "+ onOptionsItemSelected(item: MenuItem): Boolean"
+      ]
+    },
+    {
+      "name": "CameraDemo",
+      "attributes": [
+        "~ buttonClick: Button",
+        "~ shutterCallback: ShutterCallback",
+        "~ rawCallback: PictureCallback",
+        "~ jpegCallback: PictureCallback"
+      ],
+      "operations": [
+        "^# onCreate(savedInstanceState: Bundle)",
+        "^# onStart()",
+        "^# onStop()",
+        "^# onResume()",
+        "^# onPause()",
+        "^# onDestroy()",
+        "^+ onCreateOptionsMenu(menu: Menu): Boolean",
+        "^+ onOptionsItemSelected(item: MenuItem): Boolean"
+      ]
+    },
+    {
+      "name": "android.hardware.Camera",
+      "attributes": [],
+      "operations": [
+        "+ open(cameraId: Integer): Camera",
+        "+ getParameters(): Parameters",
+        "+ setParameters(params: Parameters)",
+        "+ setDisplayOrientation(degrees: Integer) {final}",
+        "+ setPreviewDisplay(holder: SurfaceHolder) {final}",
+        "+ startPreview() {final}",
+        "+ stopPreview() {final}",
+        "+ release() {final}",
+        "+ takePicture(shutter: ShutterCallback, raw: PictureCallback, postview: PictureCallback, jpeg: PictureCallback) {final}"
+      ]
+    }
+  ],
+  "enumerations": [],
+  "relationships": {
+    "association": [
+      {
+        "direction": "unidirectional",
+        "source": "CameraDemo",
+        "target": "Preview",
+        "multiplicity_source": "",
+        "multiplicity_target": ""
+      }
+    ],
+    "composition": [],
+    "aggregation": [
+      {
+        "whole": "Preview",
+        "part": "android.hardware.Camera",
+        "multiplicity_whole": "1",
+        "multiplicity_part": "1"
+      },
+      {
+        "whole": "Preview",
+        "part": "CameraDemo",
+        "multiplicity_whole": "1",
+        "multiplicity_part": "1"
+      },
+      {
+        "whole": "CameraDemo",
+        "part": "android.hardware.Camera",
+        "multiplicity_whole": "1",
+        "multiplicity_part": "1"
+      }
+    ],
+    "dependency": [
+      {
+        "dependent": "Preview",
+        "supplier": "android.view.SurfaceHolder"
+      },
+      {
+        "dependent": "android.view.SurfaceHolder",
+        "supplier": "android.view.SurfaceHolder.Callback"
+      },
+      {
+        "dependent": "android.view.SurfaceHolder.Callback",
+        "supplier": "android.view.SurfaceHolder"
+      },
+      {
+        "dependent": "android.hardware.Camera",
+        "supplier": "android.view.SurfaceHolder"
+      }
+    ],
+    "inheritance": [
+      {
+        "parent": "android.view.View",
+        "child": "android.view.SurfaceView"
+      },
+      {
+        "parent": "android.view.SurfaceView",
+        "child": "Preview"
+      },
+      {
+        "parent": "android.app.Activity",
+        "child": "CameraDemo"
+      }
+    ],
+    "realization": [
+      {
+        "interface": "android.view.SurfaceHolder.Callback",
+        "implementation": "Preview"
+      }
+    ]
+  }
+}

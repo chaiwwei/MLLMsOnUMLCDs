@@ -1,0 +1,202 @@
+{
+  "classes": [
+    {
+      "name": "Book",
+      "attributes": [
+        "ISBN: String[0..1] {id}",
+        "name: String",
+        "subject: String",
+        "overview: String",
+        "publisher: String",
+        "publicationDate: Date",
+        "lang: String"
+      ],
+      "operations": []
+    },
+    {
+      "name": "Author",
+      "attributes": [
+        "name: String {id}",
+        "biography: String",
+        "birthDate: Date"
+      ],
+      "operations": []
+    },
+    {
+      "name": "Book Item",
+      "attributes": [
+        "barcode: String [0..1] {id}",
+        "tag: RFID [0..1] {id}",
+        "^ISBN: String[0..1]",
+        "^subject: String",
+        "title: String (redefines name)",
+        "isReferenceOnly: Boolean = false",
+        "lang: Language (redefines lang)",
+        "numberOfPages: Integer",
+        "format: Format",
+        "borrowed: Date",
+        "/loanPeriod: Integer (readOnly)",
+        "/dueDate: Date (readOnly)",
+        "/isOverdue: Boolean = false"
+      ],
+      "operations": []
+    },
+    {
+      "name": "Account",
+      "attributes": [
+        "number: {id}",
+        "history: History[0..*]",
+        "opened: Date",
+        "state: AccountState"
+      ],
+      "operations": []
+    },
+    {
+      "name": "Library",
+      "attributes": [
+        "name: String",
+        "address: Address"
+      ],
+      "operations": []
+    },
+    {
+      "name": "Patron",
+      "attributes": [
+        "/name: FullName",
+        "address: Address"
+      ],
+      "operations": []
+    },
+    {
+      "name": "Catalog",
+      "attributes": [],
+      "operations": []
+    },
+    {
+      "name": "Librarian",
+      "attributes": [
+        "/name: FullName",
+        "address: Address",
+        "position: String"
+      ],
+      "operations": []
+    },
+	{
+	   "name": "Address"
+	},
+	{
+	   "name": "Full Name"
+	},
+	{
+	   "name": "Search"
+	},
+	{
+	   "name": "Manage"
+	}
+  ],
+  "enumerations": [
+    {
+      "name": "Language",
+      "literals": ["English", "French", "German", "Spanish", "Italian"]
+    },
+    {
+      "name": "AccountState",
+      "literals": ["Active", "Frozen", "Closed"]
+    },
+    {
+      "name": "Format",
+      "literals": ["Paperback", "Hardcover", "Audiobook", "Audio CD", "MP3 CD", "PDF"]
+    }
+  ],
+  "relationships": {
+    "association": [
+      {
+        "direction": "bidirectional",
+        "source": "Book",
+        "target": "Author",
+        "multiplicity_source": "1..*",
+        "multiplicity_target": "1..*"
+      },
+      {
+        "direction": "bidirectional",
+        "source": "Book Item",
+        "target": "Account",
+        "multiplicity_source": "0.12",
+        "multiplicity_target": "1"
+      },
+      {
+        "direction": "bidirectional",
+        "source": "Catalog",
+        "target": "Book Item",
+        "multiplicity_source": "1",
+        "multiplicity_target": "*"
+      }
+    ],
+    "composition": [
+      {
+        "whole": "Library",
+        "part": "Catalog",
+        "multiplicity_whole": "",
+        "multiplicity_part": ""
+      }
+    ],
+    "aggregation": [
+      {
+        "whole": "Library",
+        "part": "Book Item",
+        "multiplicity_whole": "",
+        "multiplicity_part": "*"
+      },
+      {
+        "whole": "Library",
+        "part": "Account",
+        "multiplicity_whole": "1",
+        "multiplicity_part": "*"
+      },
+      {
+		"whole": "Patron",
+        "part": "Account",
+        "multiplicity_whole": "1",
+        "multiplicity_part": "1"
+      }
+    ],
+    "dependency": [
+      {
+        "dependent": "Patron",
+        "supplier": "Search"
+      },
+      {
+        "dependent": "Librarian",
+        "supplier": "Search"
+      },
+      {
+        "dependent": "Librarian",
+        "supplier": "Manage"
+      },
+      {
+        "dependent": "Catalog",
+        "supplier": "Search"
+      },
+      {
+        "dependent": "Catalog",
+        "supplier": "Manage"
+      }
+    ],
+    "inheritance": [
+      {
+        "parent": "Book",
+        "child": "Book Item"
+      }
+    ],
+    "realization": [
+      {
+        "interface": "Search",
+        "implementation": "Catalog"
+      },
+      {
+        "interface": "Manage",
+        "implementation": "Catalog"
+      }
+    ]
+  }
+}
